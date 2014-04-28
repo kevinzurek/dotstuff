@@ -81,7 +81,7 @@ function parse_git_branch () {
 
 if [ "$color_prompt" = yes ]; then
     #PS1="$FGRN[kevin]\w$"
-    PS1="$HC$FBLE[ $FRED${debian_chroot:+($debian_chroot)}\u$FBLE: $FYEL\w$FWHT\$(parse_git_branch)$FBLE]\\$ $FGRN"
+    PS1="$HC$FBLE[$FWHT\A $FRED${debian_chroot:+($debian_chroot)}\u$FBLE: $FYEL\w$FWHT\$(parse_git_branch)$FBLE]\\$ $FGRN"
     PS2=">"
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
