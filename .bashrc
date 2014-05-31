@@ -110,6 +110,14 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
+PATH_TO_DEV='/home/kevin/Enviroment/projects/'
+FEMR='femr'
+BLISST='android-task-manager'
+
+
+alias femr='cd $PATH_TO_DEV$FEMR'
+alias blisst='cd $PATH_TO_DEV$BLISST'
+
 # some more ls aliases
 alias ll='ls -alF'
 alias la='ls -A'
