@@ -52,6 +52,7 @@ UPDATE users
 SET first_name = concat("Anonmon", @incrementalUserNumber := @incrementalUserNumber + 1),
 last_name = concat("Anonmon", @incrementalUserNumber),
 `password` = "anon",
+`email` = concat("anon", @incrementalUserNumber := @incrementalUserNumber + 1),
 notes = NULL
 WHERE email <> "admin" AND email <> "superuser";
 
