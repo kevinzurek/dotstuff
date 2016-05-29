@@ -67,7 +67,9 @@ WHERE email = "admin" OR email = "superuser";
 ###TABLE: patient_encounters
 #Allow for a patient primary key Id change to cascade to patient_encounters table
 ALTER TABLE `patient_encounters` 
-DROP FOREIGN KEY `fk_patient_encounter_patient_id_patients_id`,
+DROP FOREIGN KEY `fk_patient_encounter_patient_id_patients_id`;
+
+ALTER TABLE `patient_encounters`
 ADD CONSTRAINT `fk_patient_encounter_patient_id_patients_id`
   FOREIGN KEY (`patient_id`)
   REFERENCES `patients` (`id`)
@@ -82,7 +84,9 @@ SET id = FLOOR( 1 + RAND( ) * 2147483646 );
 ###TABLE: patient_encounters
 #Revert patient_encounters table cascade foreign key constraint
 ALTER TABLE `patient_encounters` 
-DROP FOREIGN KEY `fk_patient_encounter_patient_id_patients_id`,
+DROP FOREIGN KEY `fk_patient_encounter_patient_id_patients_id`;
+
+ALTER TABLE `patient_encounters`
 ADD CONSTRAINT `fk_patient_encounter_patient_id_patients_id`
   FOREIGN KEY (`patient_id`)
   REFERENCES `patients` (`id`)
@@ -95,7 +99,9 @@ ADD CONSTRAINT `fk_patient_encounter_patient_id_patients_id`
 ###TABLE: patient_encounter_vitals
 #Allow for the patient_encounter ID change to cascade to patient_encounter_vitals table
 ALTER TABLE `patient_encounter_vitals` 
-DROP FOREIGN KEY `fk_patient_encounter_vitals_patient_encounter_id`,
+DROP FOREIGN KEY `fk_patient_encounter_vitals_patient_encounter_id`;
+
+ALTER TABLE `patient_encounter_vitals` 
 ADD CONSTRAINT `fk_patient_encounter_vitals_patient_encounter_id`
   FOREIGN KEY (`patient_encounter_id`)
   REFERENCES `patient_encounters` (`id`)
@@ -105,7 +111,9 @@ ADD CONSTRAINT `fk_patient_encounter_vitals_patient_encounter_id`
 ###TABLE: patient_prescriptions
 #Allow for the patient_encounter ID change to cascade to patient_prescriptions table
 ALTER TABLE `patient_prescriptions` 
-DROP FOREIGN KEY `fk_patient_prescriptions_encounter_id_patient_encounters_id`,
+DROP FOREIGN KEY `fk_patient_prescriptions_encounter_id_patient_encounters_id`;
+
+ALTER TABLE `patient_prescriptions` 
 ADD CONSTRAINT `fk_patient_prescriptions_encounter_id_patient_encounters_id`
   FOREIGN KEY (`encounter_id`)
   REFERENCES `patient_encounters` (`id`)
@@ -115,7 +123,9 @@ ADD CONSTRAINT `fk_patient_prescriptions_encounter_id_patient_encounters_id`
 ###TABLE: patient_encounter_photos
 #Allow for the patient_encounter ID change to cascade to patient_encounter_photos table
 ALTER TABLE `patient_encounter_photos` 
-DROP FOREIGN KEY `patient_encounter_photos_ibfk_1`,
+DROP FOREIGN KEY `patient_encounter_photos_ibfk_1`;
+
+ALTER TABLE `patient_encounter_photos` 
 ADD CONSTRAINT `patient_encounter_photos_ibfk_1`
   FOREIGN KEY (`patient_encounter_id`)
   REFERENCES `patient_encounters` (`id`)
@@ -130,7 +140,9 @@ SET id = FLOOR( 1 + RAND( ) * 2147483646 );
 ###TABLE: patient_encounter_vitals
 #Revert patient_encounter_vitals table cascade setting change
 ALTER TABLE `patient_encounter_vitals` 
-DROP FOREIGN KEY `fk_patient_encounter_vitals_patient_encounter_id`,
+DROP FOREIGN KEY `fk_patient_encounter_vitals_patient_encounter_id`;
+
+ALTER TABLE `patient_encounter_vitals` 
 ADD CONSTRAINT `fk_patient_encounter_vitals_patient_encounter_id`
   FOREIGN KEY (`patient_encounter_id`)
   REFERENCES `patient_encounters` (`id`)
@@ -139,7 +151,9 @@ ADD CONSTRAINT `fk_patient_encounter_vitals_patient_encounter_id`
 ###TABLE: patient_prescriptions
 #Revert patient_prescriptions table cascade setting change
 ALTER TABLE `patient_prescriptions` 
-DROP FOREIGN KEY `fk_patient_prescriptions_encounter_id_patient_encounters_id`,
+DROP FOREIGN KEY `fk_patient_prescriptions_encounter_id_patient_encounters_id`;
+
+ALTER TABLE `patient_prescriptions` 
 ADD CONSTRAINT `fk_patient_prescriptions_encounter_id_patient_encounters_id`
   FOREIGN KEY (`encounter_id`)
   REFERENCES `patient_encounters` (`id`)
@@ -149,7 +163,9 @@ ADD CONSTRAINT `fk_patient_prescriptions_encounter_id_patient_encounters_id`
 ###TABLE: patient_encounter_photos
 #Revert patient_encounter_photos table cascade setting change
 ALTER TABLE `patient_encounter_photos` 
-DROP FOREIGN KEY `patient_encounter_photos_ibfk_1`,
+DROP FOREIGN KEY `patient_encounter_photos_ibfk_1`;
+
+ALTER TABLE `patient_encounter_photos` 
 ADD CONSTRAINT `patient_encounter_photos_ibfk_1`
   FOREIGN KEY (`patient_encounter_id`)
   REFERENCES `patient_encounters` (`id`)
