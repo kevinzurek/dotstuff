@@ -37,7 +37,15 @@ UPDATE users
 SET first_name = concat("Anonmon", @incrementalUserNumber := @incrementalUserNumber + 1),
 last_name = concat("Anonmon", @incrementalUserNumber),
 `password` = "anon",
-notes = NULL;
+notes = NULL
+WHERE email <> "admin" AND email <> "superuser";
+
+#users
+#Set the password for admin and superuser accounts equal to the hashed equivalent of "Password1"
+UPDATE users
+SET `password` = "$2a$10$vQKZmTaPgHTxUwFMKZSfC.43AlGRoZhBhiL9dStu/Mc.M5NIBxH5q"
+WHERE email = "admin" OR email = "superuser";
+
 
 #Allow for the patient ID change to cascade to patient_encounters table
 ALTER TABLE `patient_encounters` 
