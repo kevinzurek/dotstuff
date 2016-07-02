@@ -110,7 +110,7 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
-PATH_TO_DEV='/home/kevin/Enviroment/projects/'
+PATH_TO_DEV='/home/kevin/Git/'
 FEMR='femr'
 BLISST='android-task-manager'
 
@@ -119,9 +119,7 @@ alias femr='cd $PATH_TO_DEV$FEMR'
 alias blisst='cd $PATH_TO_DEV$BLISST'
 
 # some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
+alias l='ls -alF'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
