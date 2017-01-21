@@ -74,14 +74,30 @@ BBLE="\[\033[44m\]" # background blue
 BMAG="\[\033[45m\]" # background magenta
 BCYN="\[\033[46m\]" # background cyan
 BWHT="\[\033[47m\]" # background white
-# show git branch
+
+
+# parse the branch name you are currently on based on 'git branch' output
 function parse_git_branch () {
-       git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+	#redirect errors to /dev/null then parse branch name
+    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
+
+# checks if branch has pending changes
+function parse_git_dirty() {
+    git diff --quiet --ignore-submodules HEAD 2>/dev/null; [ $? -eq 1 ] && echo "*"
+}
+
+# get last commit hash
+function parse_git_hash() {
+  git rev-parse --short HEAD 2> /dev/null | sed "s/\(.*\)/:\1/"
+}
+
+
+
 
 if [ "$color_prompt" = yes ]; then
     #PS1="$FGRN[kevin]\w$"
-    PS1="$HC$FBLE[$FWHT\A $FRED${debian_chroot:+($debian_chroot)}\u$FBLE: $FYEL\w$FWHT\$(parse_git_branch)$FBLE]\\$ $FGRN"
+    PS1="$HC$FBLE[$FWHT\A $FRED${debian_chroot:+($debian_chroot)}\u$FBLE: $FYEL\w$FWHT\$(parse_git_branch)\$(parse_git_hash)$FRED\$(parse_git_dirty)$FBLE]\\$ $FGRN"
     PS2=">"
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
