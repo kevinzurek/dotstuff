@@ -79,7 +79,7 @@ BWHT="\[\033[47m\]" # background white
 # parse the branch name you are currently on based on 'git branch' output
 function parse_git_branch () {
 	#redirect errors to /dev/null then parse branch name
-    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
 }
 
 # checks if branch has pending changes
@@ -89,15 +89,45 @@ function parse_git_dirty() {
 
 # get last commit hash
 function parse_git_hash() {
-  git rev-parse --short HEAD 2> /dev/null | sed "s/\(.*\)/:\1/"
+  git rev-parse --short HEAD 2> /dev/null | sed "s/\(.*\)/\1/"
 }
+
+
+
+
+#### PS1 breakdown ####
+# '$HC': hicolor, brighten up the text
+# '$FBLE': set foreground to blue
+# '['
+# '$FWHT': set foreground to white
+# '\A': timestamp HH:MM
+# '$FRED': set foreground to red
+# '${debian_chroot:+($debian_chroot)}': tell me if i'm in da chroot
+# '\u': display current username
+# '$FBLE': set foreground to blue
+# ':'
+# '$FYEL': set foreground to yellow
+# '\w': display current working directory
+# '$FWHT': change foreground to white
+# '\': call parse_git_branch everytime
+# '$(parse_git_branch)': if you are in a git repo, get the name of current branch
+# '\': call parse_git_hash everytime
+# 'parse_git_hash' if you are in a git repo, get the current commit hash
+# '$FRED': change foreground to red for indicating dirty git things
+# 'parse_git_dirty': put an asterick up if files have changed since last commit
+# '$FBLE': change the foreground to blue
+# ']'
+# '$FGRN': green plz
+
+
+
 
 
 
 
 if [ "$color_prompt" = yes ]; then
     #PS1="$FGRN[kevin]\w$"
-    PS1="$HC$FBLE[$FWHT\A $FRED${debian_chroot:+($debian_chroot)}\u$FBLE: $FYEL\w$FWHT\$(parse_git_branch)\$(parse_git_hash)$FRED\$(parse_git_dirty)$FBLE]\\$ $FGRN"
+    PS1="$HC$FBLE[$FMAG\A $RS$FRED${debian_chroot:+($debian_chroot)}\u@\H$HC$FBLE: $FCYN\w $FCYN($FYEL\$(parse_git_branch)$FCYN-$FYEL\$(parse_git_hash)$FRED\$(parse_git_dirty)$FCYN)$FBLE]$ $FGRN"
     PS2=">"
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
@@ -129,10 +159,12 @@ fi
 PATH_TO_DEV='/home/kevin/Git/'
 FEMR='femr'
 BLISST='android-task-manager'
+CFOUND='cf-release'
 
 
 alias femr='cd $PATH_TO_DEV$FEMR'
 alias blisst='cd $PATH_TO_DEV$BLISST'
+alias cfound='cd $PATH_TO_DEV$CFOUND'
 
 # some more ls aliases
 alias l='ls -alF'
