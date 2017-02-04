@@ -165,6 +165,7 @@ CFOUND='cf-release'
 alias femr='cd $PATH_TO_DEV$FEMR'
 alias blisst='cd $PATH_TO_DEV$BLISST'
 alias cfound='cd $PATH_TO_DEV$CFOUND'
+alias gl='git log --pretty="format:%H %aN %s %G?" -n 5'
 
 # some more ls aliases
 alias l='ls -alF'
