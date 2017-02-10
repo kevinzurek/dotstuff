@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [ ! -f ~/.bashrc.backup ]
+  then
+    mv ~/.bashrc ~/.bashrc.backup
+    ln -sv $PWD/dot_things/.bashrc ~/.bashrc
+    source ~/.bashrc
+    echo "Success"
+  else
+    echo "Please remove .bashrc.backup and try again"
+fi
